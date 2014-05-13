@@ -1,22 +1,16 @@
-*.gem
-*.rbc
-.bundle
-.config
-coverage
-InstalledFiles
-lib/bundler/man
-pkg
-rdoc
-spec/reports
-test/tmp
-test/version_tmp
-tmp
+*.DS_Store
+Thumbs.db
+Desktop.ini
 
-# YARD artifacts
-.yardoc
-_yardoc
-doc/
+!*.keep
 
-bower_components
-node_modules
-vendor
+test.*
+*.pid
+*.log
+*.rdb
+.ruby-gemset
+.ruby-version
+
+*.xls
+pass*
+*.sql
