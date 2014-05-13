@@ -1,0 +1,17 @@
+{
+  "name": "stargazer",
+  "version": "0.0.1",
+  "description": "GitHub star manager",
+  "main": null,
+  "dependencies": {
+    "gulp": "~3.6.2",
+    "gulp-jshint": "~1.5.5",
+    "gulp-concat": "~2.2.0",
+    "gulp-uglify": "~0.2.1",
+    "gulp-rename": "~1.2.0",
+    "gulp-bower-files": "~0.2.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
