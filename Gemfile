@@ -1,20 +1,24 @@
-source 'https://rubygems.org/'
-ruby '2.1.2'
+source "https://rubygems.org/"
+ruby "2.1.2"
+
+# Workers
+gem "sidekiq"
+gem "redis"
 
 # Utils
-gem 'httparty'
+gem "unirest"
+gem "octokit"
 
 # Sinatra
-gem 'haml'
-gem 'sinatra'
-gem 'rack_csrf'
-gem 'sinatra-contrib'
+gem "sinatra"
+gem "rack_csrf"
+gem "sinatra-contrib"
 
 # Deploy
-gem 'thin'
+gem "thin"
 
 group :development do
-  gem 'mina'
-  gem 'shotgun'
-  gem 'pry'
+  gem "mina"
+  gem "shotgun"
+  gem "pry"
 end
