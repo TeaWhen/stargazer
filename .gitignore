@@ -14,3 +14,8 @@ test.*
 *.xls
 pass*
 *.sql
+
+bower_components
+node_modules
+vendor
+js

@@ -12,14 +12,14 @@ gulp.task('lint', function() {
 });
 
 gulp.task('vendor', function() {
-  return bower().pipe(gulp.dest("vendor"));
+  // return bower().pipe(gulp.dest("vendor"));
 })
 
 gulp.task('minify', function(){
   return gulp.src('src/*.js')
-    .pipe(concat('all.js'))
-    .pipe(gulp.dest('dist'))
-    .pipe(rename('all.min.js'))
+    .pipe(concat('app.js'))
+    .pipe(gulp.dest('js'))
+    .pipe(rename('app.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest('js'));
 });
