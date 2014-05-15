@@ -1,0 +1,36 @@
+body {
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+html, body {
+	height: 100%;
+	position: relative;
+}
+
+#container {
+	height: 100%;
+}
+
+#row {
+	height: 100%;
+}
+
+#sidebar {
+	background-color: #2D2D2D;
+	color: white;
+	height: 100%;
+}
+
+h1 {
+	text-align: center;
+	font-size: 36px;
+}
+
+#repolist {
+	height: 100%;
+	border-right: 1px solid #DDD;
+}
+
+#main {
+	height: 100%;
+}

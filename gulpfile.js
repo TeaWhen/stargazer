@@ -18,10 +18,10 @@ gulp.task('vendor', function() {
 gulp.task('minify', function(){
   return gulp.src('src/*.js')
     .pipe(concat('app.js'))
-    .pipe(gulp.dest('js'))
+    .pipe(gulp.dest('public/js'))
     .pipe(rename('app.min.js'))
     .pipe(uglify())
-    .pipe(gulp.dest('js'));
+    .pipe(gulp.dest('public/js'));
 });
 
 gulp.task('watch', function() {
