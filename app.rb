@@ -65,12 +65,11 @@ helpers do
 end
 
 get '/login/?' do
-  # binding.pry
-  # unless cookies[:atk]
+  unless cookies[:atk]
     redirect "https://github.com/login/oauth/authorize?client_id=#{settings.client_id}&redirect_uri=http://127.0.0.1:9393/auth_github/&scope=user:follow"
-  # else
-  #   redirect "/u"
-  # end
+  else
+    redirect "/u"
+  end
 end
 
 get '/auth_github/?' do
