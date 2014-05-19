@@ -99,7 +99,7 @@ get '/u/?' do
   resp = Unirest.get "http://127.0.0.1:5984/stargazer_meta/#{user.login}",
     auth: { user: "starwarden", password: ENV["COUCHDB_ADMIN_PASSWORD"]}
   if resp.body["downloaded"]
-    return "done."
+    erb :user
   else
     return "not done."
   end

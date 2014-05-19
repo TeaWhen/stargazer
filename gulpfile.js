@@ -28,4 +28,10 @@ gulp.task('watch', function() {
   gulp.watch('src/*.js', ['lint', 'minify']);
 });
 
-gulp.task('default', ['vendor', 'lint', 'minify', 'watch']);
+gulp.task('erbify', function() {
+  return gulp.src('src/user.html')
+    .pipe(rename('user.erb'))
+    .pipe(gulp.dest('views'));
+});
+
+gulp.task('default', ['vendor', 'lint', 'minify', 'watch', 'erbify']);

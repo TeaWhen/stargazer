@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "GitHub star manager",
   "main": null,
+  "repository" :{
+    "type": "git",
+    "url": "git@github.com:TeaWhen/stargazer.git"
+  },
   "dependencies": {
     "gulp": "~3.6.2",
     "gulp-jshint": "~1.5.5",

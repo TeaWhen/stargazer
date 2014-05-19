@@ -11,9 +11,7 @@ test.*
 .ruby-gemset
 .ruby-version
 
-*.xls
-pass*
-*.sql
+views/
 
 bower_components
 node_modules
