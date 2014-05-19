@@ -9,16 +9,21 @@ html, body {
 
 #container {
 	height: 100%;
+	overflow: auto;
 }
 
 #row {
 	height: 100%;
+	overflow: auto;
 }
 
 #sidebar {
 	background-color: #2D2D2D;
 	color: white;
 	height: 100%;
+	overflow: auto;
+	padding: 0;
+	width: 22%;
 }
 
 h1 {
@@ -29,8 +34,90 @@ h1 {
 #repolist {
 	height: 100%;
 	border-right: 1px solid #DDD;
+	padding: 0;
+	width: 23%;
 }
 
 #main {
 	height: 100%;
+	width: 50%;
+}
+
+#avatar {
+	height: 64px;
+	width: 64px;
+	display: block;
+	margin: 20px auto;
+}
+
+#search {
+	display: block;
+	margin: 20px auto;
+	height: 37px;
+	width: 100%;
+	border: 0;
+	padding: 2px 45px;
+	background-color: #4C4C4C;
+	color: #A6A6A6;
+	outline: none;
+	font-size: 20px;
+}
+
+h2 {
+	padding: 2px 45px;
+	font-family: SourceSansPro-Semibold;
+	font-size: 20px;
+	color: #CD98CD;
+	text-transform: uppercase;
+}
+
+#untagged-badge {
+	margin-left: 8px;
+	padding: 3px 10px;
+	background-color: white;
+	color: #2D2D2D;
+	font-weight: normal;
+	font-size: 16px;
+}
+
+#sidebar ul {
+	padding: 0;
+}
+
+#languages {
+	margin-bottom: 30px;
+}
+
+#sidebar li {
+	list-style-type: none;
+	color: white;
+	text-decoration: none;
+	display: block;
+	padding: 2px 45px;
+	font-size: 20px;
+}
+
+#sidebar li:hover {
+	background-color: #555;
+}
+
+#sidebar .active {
+	background-color: #6C6C6C;
+}
+
+#tags li {
+	padding-left: 56px;
+}
+
+#languages li {
+	padding-left: 56px;
+}
+
+#sort {
+	width: 100%;
+	display: block;
+	text-align: right;
+	border: 0 !important;
+	-webkit-appearance: none;
+	-moz-appearance: none;
 }
