@@ -6,7 +6,7 @@ GitHub star management, on web.
 
 1. Install `node`
 2. `npm install -g bower gulp`
-3. `npm install and `bower install`
+3. `npm install` and `bower install`
 4. `gulp`
 
 ## Backend
