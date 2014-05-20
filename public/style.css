@@ -1,5 +1,6 @@
 body {
 	font-family: 'Source Sans Pro', sans-serif;
+	min-width: 1024px;
 }
 
 html, body {
@@ -7,12 +8,12 @@ html, body {
 	position: relative;
 }
 
-#container {
-	height: 100%;
-	overflow: auto;
-}
-
-#row {
+#container,
+#row,
+#sidebar,
+#repolist,
+#main
+ {
 	height: 100%;
 	overflow: auto;
 }
@@ -20,10 +21,9 @@ html, body {
 #sidebar {
 	background-color: #2D2D2D;
 	color: white;
-	height: 100%;
-	overflow: auto;
 	padding: 0;
 	width: 22%;
+	float: left;
 }
 
 h1 {
@@ -32,15 +32,15 @@ h1 {
 }
 
 #repolist {
-	height: 100%;
 	border-right: 1px solid #DDD;
 	padding: 0;
 	width: 23%;
+	float: left;
 }
 
 #main {
-	height: 100%;
 	width: 50%;
+	float: left;
 }
 
 #avatar {
@@ -54,7 +54,6 @@ h1 {
 	display: block;
 	margin: 20px auto;
 	height: 37px;
-	width: 100%;
 	border: 0;
 	padding: 2px 45px;
 	background-color: #4C4C4C;
@@ -113,11 +112,20 @@ h2 {
 	padding-left: 56px;
 }
 
-#sort {
+#sort-select {
 	width: 100%;
-	display: block;
+	line-height: 25px;
+	border: 0;
+	border-bottom: 1px solid #DDD;
+}
+
+#sort {
 	text-align: right;
-	border: 0 !important;
-	-webkit-appearance: none;
-	-moz-appearance: none;
+	padding-right: 8px;
+	width: 100%;
+	font-size: 16px;
+	border: 0;
+	background-color: white;
+	text-decoration: none;
+	color: #2D2D2D;
 }

@@ -17,7 +17,7 @@
 <body data-ng-controller="stargazerController">
 	<div class="container-fluid" id="container">
 		<div class="row" id="row">
-			<div class="col-md-2" id="sidebar">
+			<div id="sidebar">
 				<h1>Stargazer</h1>
 				<img id="avatar" src="66.png" class="img-thumbnail" align="middle">
 				<input id="search" data-ng-model="searchText" type="text" placeholder="Search...">
@@ -34,17 +34,17 @@
 					<li data-ng-repeat="language in languages" data-ng-click="select('language', language)" data-ng-class="{active: isActive('language', language)}">{{ language }}</li>
 				</ul>
 			</div>
-			<div class="col-md-3" id="repolist">
-				<div class="btn-group">
-					<button id="sample-code" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-					{{ sort }} <span class="caret"></span>
-					</button>
+			<div id="repolist">
+				<div id="sort-select" class="btn-group">
+					<a href id="sort" class="dropdown-toggle pull-right" data-toggle="dropdown">
+					{{ sortSelected }}<span class="caret"></span>
+					</a>
 					<ul class="dropdown-menu pull-right">
-						<li data-ng-repeat="sort in sorts"><a href>{{ sort }}</a></li>
+						<li data-ng-repeat="sort in sorts" data-ng-click="selectSort(sort)"><a href>{{ sort }}</a></li>
 					</ul>
 				</div>
 			</div>
-			<div class="col-md-7" id="main">Main</div>
+			<div id="main"><p>Main</p></div>
 		</div>
 	</div>
 </body>

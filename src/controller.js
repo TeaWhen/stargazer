@@ -8,6 +8,7 @@ stargazerApp.controller('stargazerController', function ($scope, stargazerFactor
 	$scope.selected = '';
 	$scope.filter = '';
 	$scope.searchText = '';
+	$scope.sortSelected = '';
 
 	init();
 	function init() {
@@ -15,6 +16,7 @@ stargazerApp.controller('stargazerController', function ($scope, stargazerFactor
 		$scope.languages = stargazerFactory.getLanguages();
 		$scope.sorts = stargazerFactory.getSorts();
 		$scope.untagged = stargazerFactory.getUntagged();
+		$scope.sortSelected = $scope.sorts[0];
 	}
 
 	$scope.select = function(filter, item) {
@@ -24,6 +26,10 @@ stargazerApp.controller('stargazerController', function ($scope, stargazerFactor
 
 	$scope.isActive = function(filter, item) {
 		return $scope.selected === filter + item;
+	};
+
+	$scope.selectSort = function(item) {
+		$scope.sortSelected = item;
 	};
 });
 
