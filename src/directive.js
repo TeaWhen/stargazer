@@ -17,6 +17,21 @@ stargazerApp.factory('stargazerFactory', function () {
 	];
 	var untagged = 33;
 
+	var repos = [
+		{
+			'title': 'TEAChart',
+			'stars': 585,
+			'description': 'Simple and intuitive iOS chart library. Contribution graph, clock chart, and baralweriujncafwetijnf',
+			'tags': ['Chart', 'iOS']
+		},
+		{
+			'title': 'Stargazer',
+			'stars': 1024,
+			'description': 'GitHub star management, on web.',
+			'tags': ['GitHub', 'Web']
+		}
+	];
+
 	factory.getTags = function () {
 		return tags;
 	};
@@ -32,5 +47,10 @@ stargazerApp.factory('stargazerFactory', function () {
 	factory.getUntagged = function () {
 		return untagged;
 	};
+
+	factory.getRepos = function () {
+		return repos;
+	};
+
 	return factory;
 });

@@ -12,7 +12,10 @@ gulp.task('lint', function() {
 });
 
 gulp.task('vendor', function() {
-  // return bower().pipe(gulp.dest("vendor"));
+  return bower()
+    .pipe(concat('vendor.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('public/js'));
 })
 
 gulp.task('minify', function(){

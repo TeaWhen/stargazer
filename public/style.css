@@ -94,6 +94,7 @@ h2 {
 	display: block;
 	padding: 2px 45px;
 	font-size: 20px;
+	cursor: pointer;
 }
 
 #sidebar li:hover {
@@ -128,4 +129,58 @@ h2 {
 	background-color: white;
 	text-decoration: none;
 	color: #2D2D2D;
+}
+
+#repolist .repo {
+	padding: 10px 20px 15px 20px;
+	border-bottom: 1px solid #DDD;
+}
+
+#repolist .title-line {
+	clear: both;
+}
+
+#repolist .title {
+	font-size: 22px;
+	float: left;
+	margin-bottom: 3px;
+}
+
+#repolist .stars {
+	position: relative;
+	font-size: 22px;
+	float: right;
+}
+
+#repolist .star-number {
+	position: absolute;
+	right: 23px;
+}
+
+#repolist .star-icon {
+	position: absolute;
+	font-size: 19px;
+	top: 6px;
+	right: 0;
+}
+
+#repolist .description {
+	width: 100%;
+	font-size: 16px;
+	color: #717171;
+	height: 40px;
+	margin-bottom: 10px;
+	line-height: 20px;
+	overflow: hidden;
+	padding: 0;
+	clear: both;
+}
+
+#repolist .tag {
+	background-color: #E0EFE0;
+	color: #266F26;
+	font-size: 16px;
+	border-radius: 4px;
+	padding: 0 9px 1px 9px;
+	margin-right: 8px;
 }
