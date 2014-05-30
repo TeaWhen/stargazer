@@ -22,13 +22,15 @@ stargazerApp.factory('stargazerFactory', function () {
 			'title': 'TEAChart',
 			'stars': 585,
 			'description': 'Simple and intuitive iOS chart library. Contribution graph, clock chart, and baralweriujncafwetijnf',
-			'tags': ['Chart', 'iOS']
+			'tags': ['Chart', 'iOS'],
+			'readme': "# Stargazer \r\n GitHub star management, on web."
 		},
 		{
 			'title': 'Stargazer',
 			'stars': 1024,
 			'description': 'GitHub star management, on web.',
-			'tags': ['GitHub', 'Web']
+			'tags': ['GitHub', 'Web'],
+			'readme': "# Stargazer \r\n GitHub star management, on web."
 		}
 	];
 

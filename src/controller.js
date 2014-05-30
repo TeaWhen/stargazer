@@ -1,6 +1,6 @@
-var stargazerApp = angular.module('stargazerApp', []);
+var stargazerApp = angular.module('stargazerApp', ['ngSanitize']);
 
-stargazerApp.controller('stargazerController', function ($scope, stargazerFactory) {
+stargazerApp.controller('stargazerController', function ($scope, $sce, stargazerFactory) {
 	$scope.tags = [];
 	$scope.languages = [];
 	$scope.sorts = [];
@@ -11,6 +11,17 @@ stargazerApp.controller('stargazerController', function ($scope, stargazerFactor
 	$scope.sortSelected = '';
 	$scope.repos = [];
 
+	marked.setOptions({
+	  renderer: new marked.Renderer(),
+	  gfm: true,
+	  tables: true,
+	  breaks: false,
+	  pedantic: false,
+	  sanitize: true,
+	  smartLists: true,
+	  smartypants: false
+	});
+
 	init();
 	function init() {
 		$scope.tags = stargazerFactory.getTags();
@@ -19,6 +30,9 @@ stargazerApp.controller('stargazerController', function ($scope, stargazerFactor
 		$scope.untagged = stargazerFactory.getUntagged();
 		$scope.sortSelected = $scope.sorts[0];
 		$scope.repos = stargazerFactory.getRepos();
+		for (i = 0; i < $scope.repos.length; ++i) {
+			$scope.repos[i].readme = marked($scope.repos[i].readme);
+		}
 	}
 
 	$scope.select = function (filter, item) {

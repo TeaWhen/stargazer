@@ -184,3 +184,8 @@ h2 {
 	padding: 0 9px 1px 9px;
 	margin-right: 8px;
 }
+
+.markdown-body {
+	margin: 0 auto;
+	padding: 30px;
+}

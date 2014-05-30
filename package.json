@@ -3,17 +3,18 @@
   "version": "0.0.1",
   "description": "GitHub star manager",
   "main": null,
-  "repository" :{
+  "repository": {
     "type": "git",
     "url": "git@github.com:TeaWhen/stargazer.git"
   },
   "dependencies": {
     "gulp": "~3.6.2",
-    "gulp-jshint": "~1.5.5",
+    "gulp-bower-files": "~0.2.2",
     "gulp-concat": "~2.2.0",
-    "gulp-uglify": "~0.2.1",
+    "gulp-jshint": "~1.5.5",
     "gulp-rename": "~1.2.0",
-    "gulp-bower-files": "~0.2.2"
+    "gulp-uglify": "~0.2.1",
+    "marked": "^0.3.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
