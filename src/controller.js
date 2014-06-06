@@ -1,16 +1,6 @@
 var stargazerApp = angular.module('stargazerApp', ['ngSanitize']);
 
 stargazerApp.controller('stargazerController', function ($scope, $sce, stargazerFactory) {
-	$scope.tags = [];
-	$scope.languages = [];
-	$scope.sorts = [];
-	$scope.untagged = 0;
-	$scope.selected = '';
-	$scope.filter = '';
-	$scope.searchText = '';
-	$scope.sortSelected = '';
-	$scope.repos = [];
-
 	marked.setOptions({
 	  renderer: new marked.Renderer(),
 	  gfm: true,
@@ -22,6 +12,16 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 	  smartypants: false
 	});
 
+	$scope.tags = [];
+	$scope.languages = [];
+	$scope.sorts = [];
+	$scope.untagged = 0;
+	$scope.selected = {};
+	$scope.searchText = '';
+	$scope.sortSelected = '';
+	$scope.repos = [];
+	$scope.curRepo = {'readme': marked("# Welcome. \r\n Let's show you how to use stargazer.")};
+
 	init();
 	function init() {
 		$scope.tags = stargazerFactory.getTags();
@@ -31,17 +31,45 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 		$scope.sortSelected = $scope.sorts[0];
 		$scope.repos = stargazerFactory.getRepos();
 		for (i = 0; i < $scope.repos.length; ++i) {
+			$scope.repos[i].visible = true;
 			$scope.repos[i].readme = marked($scope.repos[i].readme);
 		}
 	}
 
 	$scope.select = function (filter, item) {
-		$scope.selected = filter + item;
-		$scope.filter = item;
+		if ($scope.selected[filter] === item) {
+			$scope.selected[filter] = '';
+		} else {
+			$scope.selected[filter] = item;
+		}
+		if (filter == 'repo') {
+			for (i = 0; i < $scope.repos.length; ++i) {
+				if ($scope.repos[i].title == item) {
+					$scope.curRepo = $scope.repos[i];
+					break;
+				}
+			}
+		} else if (filter == 'tag') {
+			for (i = 0; i < $scope.repos.length; ++i) {
+				if ($scope.repos[i].tags.indexOf(item) > -1) {
+					$scope.repos[i].visible = $scope.selected[filter] !== item;
+				} else {
+					$scope.repos[i].visible = $scope.selected[filter] === item;
+				}
+			}
+		}
 	};
 
 	$scope.isActive = function (filter, item) {
-		return $scope.selected === filter + item;
+		return $scope.selected[filter] === item;
+	};
+
+	$scope.isHidden = function (title) {
+		for (i = 0; i < $scope.repos.length; ++i) {
+			if ($scope.repos[i].title === title) {
+				return !$scope.repos[i].visible;
+			}
+		}
 	};
 
 	$scope.selectSort = function (item) {

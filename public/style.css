@@ -136,6 +136,18 @@ h2 {
 	border-bottom: 1px solid #DDD;
 }
 
+#repolist .repo:hover {
+	background-color: rgb(210, 210, 210);
+}
+
+#repolist .active {
+	background-color: rgb(170, 170, 170);
+}
+
+#repolist .hidden {
+	display: none;
+}
+
 #repolist .title-line {
 	clear: both;
 }

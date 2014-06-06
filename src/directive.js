@@ -1,8 +1,10 @@
 stargazerApp.factory('stargazerFactory', function () {
 	var factory = {};
 	var tags = [
-		'UI',
-		'Audio'
+		'Chart',
+		'iOS',
+		'GitHub',
+		'Web'
 	];
 	var languages = [
 		'Objective-C',
@@ -23,7 +25,7 @@ stargazerApp.factory('stargazerFactory', function () {
 			'stars': 585,
 			'description': 'Simple and intuitive iOS chart library. Contribution graph, clock chart, and baralweriujncafwetijnf',
 			'tags': ['Chart', 'iOS'],
-			'readme': "# Stargazer \r\n GitHub star management, on web."
+			'readme': "# TEAChart \r\n TEAChart is a chart."
 		},
 		{
 			'title': 'Stargazer',
