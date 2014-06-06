@@ -21,6 +21,7 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 	$scope.sortSelected = '';
 	$scope.repos = [];
 	$scope.curRepo = {'readme': marked("# Welcome. \r\n Let's show you how to use stargazer.")};
+	filters = ['general', 'repo', 'tag', 'language'];
 
 	init();
 	function init() {
@@ -34,15 +35,21 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 			$scope.repos[i].visible = true;
 			$scope.repos[i].readme = marked($scope.repos[i].readme);
 		}
+		for (i = 0; i < filters.length; ++i) {
+			$scope.selected[filters[i]] = [];
+		}
 	}
 
 	$scope.select = function (filter, item) {
-		if ($scope.selected[filter] === item) {
-			$scope.selected[filter] = '';
+		index = $scope.selected[filter].indexOf(item);
+		if (index > -1) {
+			$scope.selected[filter].splice(index, 1);
 		} else {
-			$scope.selected[filter] = item;
+			$scope.selected[filter].push(item);
 		}
+
 		if (filter == 'repo') {
+			$scope.selected[filter] = [item];
 			for (i = 0; i < $scope.repos.length; ++i) {
 				if ($scope.repos[i].title == item) {
 					$scope.curRepo = $scope.repos[i];
@@ -51,17 +58,18 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 			}
 		} else if (filter == 'tag') {
 			for (i = 0; i < $scope.repos.length; ++i) {
-				if ($scope.repos[i].tags.indexOf(item) > -1) {
-					$scope.repos[i].visible = $scope.selected[filter] !== item;
-				} else {
-					$scope.repos[i].visible = $scope.selected[filter] === item;
+				$scope.repos[i].visible = true;
+				for (j = 0; j < $scope.selected[filter].length; ++j) {
+					if ($scope.repos[i].tags.indexOf($scope.selected.tag[j]) <= -1) {
+						$scope.repos[i].visible = false;
+					}
 				}
 			}
 		}
 	};
 
 	$scope.isActive = function (filter, item) {
-		return $scope.selected[filter] === item;
+		return $scope.selected[filter].indexOf(item) > -1;
 	};
 
 	$scope.isHidden = function (title) {
