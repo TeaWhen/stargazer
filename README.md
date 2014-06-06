@@ -27,3 +27,4 @@ export COUCHDB_ADMIN_PASSWORD={couchdb_admin_password}
 6. Fire up sidekiq with `sidekiq -r ./app.rb`
 7. Fire up server with `shotgun`
 8. http://127.0.0.1:9393/login and wait
+9. `couchdb`
