@@ -81,7 +81,12 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 	};
 
 	$scope.selectSort = function (item) {
-		$scope.sortSelected = item;
+		if ($scope.sortSelected === item.toLowerCase()) {
+			$scope.sortSelected = '-' + item.toLowerCase();
+		}
+		else {
+			$scope.sortSelected = item.toLowerCase();
+		}
 	};
 
 	$(document).ready(function () {
@@ -91,4 +96,3 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 		});
 	});
 });
-

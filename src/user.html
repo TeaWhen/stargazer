@@ -45,7 +45,7 @@
 						<li data-ng-repeat="sort in sorts" data-ng-click="selectSort(sort)"><a href>{{ sort }}</a></li>
 					</ul>
 				</div>
-				<div class="repo" data-ng-repeat="repo in repos" data-ng-click="select('repo', repo.title)" data-ng-class="{active: isActive('repo', repo.title), hidden: isHidden(repo.title)}">
+				<div class="repo" data-ng-repeat="repo in repos | orderBy:sortSelected" data-ng-click="select('repo', repo.title)" data-ng-class="{active: isActive('repo', repo.title), hidden: isHidden(repo.title)}">
 					<div class="title-line">
 						<p class="title">{{ repo.title }}</p>
 						<p class="stars">
