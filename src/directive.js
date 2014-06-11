@@ -36,6 +36,26 @@ stargazerApp.factory('stargazerFactory', function () {
 		}
 	];
 
+	importFromPouchDB();
+	function importFromPouchDB () {
+		var db = new PouchDB('http://starwarden:password@localhost:5984/yzheng624');
+		functionOutOfLoop = function (err, doc) {
+			repo = {
+				'title': doc.name,
+				'stars': doc.stargazers_count,
+				'description': doc.description,
+				'tags': ['Chart', 'iOS'],
+				'readme': "# TEAChart \r\n TEAChart is a chart."
+			};
+			repos.push(repo);
+		};
+		db.allDocs(function(err, doc) {
+			for (i = 0; i < doc.rows.length; i++) {
+				db.get(doc.rows[i].id, functionOutOfLoop);
+			}
+		});
+	}
+
 	factory.getTags = function () {
 		return tags;
 	};

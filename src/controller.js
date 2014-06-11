@@ -23,21 +23,24 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 	$scope.curRepo = {'readme': marked("# Welcome. \r\n Let's show you how to use stargazer.")};
 	filters = ['general', 'repo', 'tag', 'language'];
 
+	setInterval(init(), 1000);
 	init();
 	function init() {
-		$scope.tags = stargazerFactory.getTags();
-		$scope.languages = stargazerFactory.getLanguages();
-		$scope.sorts = stargazerFactory.getSorts();
-		$scope.untagged = stargazerFactory.getUntagged();
-		$scope.sortSelected = $scope.sorts[0];
-		$scope.repos = stargazerFactory.getRepos();
-		for (i = 0; i < $scope.repos.length; ++i) {
-			$scope.repos[i].visible = true;
-			$scope.repos[i].readme = marked($scope.repos[i].readme);
-		}
-		for (i = 0; i < filters.length; ++i) {
-			$scope.selected[filters[i]] = [];
-		}
+		$scope.$apply(function () {
+			$scope.tags = stargazerFactory.getTags();
+			$scope.languages = stargazerFactory.getLanguages();
+			$scope.sorts = stargazerFactory.getSorts();
+			$scope.untagged = stargazerFactory.getUntagged();
+			$scope.sortSelected = $scope.sorts[0];
+			$scope.repos = stargazerFactory.getRepos();
+			for (i = 0; i < $scope.repos.length; ++i) {
+				$scope.repos[i].visible = true;
+				$scope.repos[i].readme = marked($scope.repos[i].readme);
+			}
+			for (i = 0; i < filters.length; ++i) {
+				$scope.selected[filters[i]] = [];
+			}
+		});
 	}
 
 	$scope.select = function (filter, item) {

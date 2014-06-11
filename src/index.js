@@ -1,11 +1,11 @@
 $(function() {
-    var db = new PouchDB('stars');
-    var remoteCouch = 'http://admin:admin@localhost:5984/stars';
+    var db = new PouchDB('http://starwarden:password@localhost:5984/yzheng624');
+    var remoteCouch = 'http://starwarden:password@localhost:5984/yzheng624';
 
     function sync() {
         // syncDom.setAttribute('data-sync-state', 'syncing');
         var opts = {live: true};
-        db.replicate.to(remoteCouch, opts);
+        // db.replicate.to(remoteCouch, opts);
         db.replicate.from(remoteCouch, opts);
     }
 
