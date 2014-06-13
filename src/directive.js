@@ -19,25 +19,36 @@ stargazerApp.factory('stargazerFactory', function () {
 	];
 	var untagged = 33;
 
-	var repos = [
-		{
-			'title': 'TEAChart',
-			'stars': 585,
-			'description': 'Simple and intuitive iOS chart library. Contribution graph, clock chart, and baralweriujncafwetijnf',
-			'tags': ['Chart', 'iOS'],
-			'readme': "# TEAChart \r\n TEAChart is a chart."
-		},
-		{
-			'title': 'Stargazer',
-			'stars': 1024,
-			'description': 'GitHub star management, on web.',
-			'tags': ['GitHub', 'Web'],
-			'readme': "# Stargazer \r\n GitHub star management, on web."
-		}
-	];
+	// var repos = [
+	// 	{
+	// 		'title': 'TEAChart',
+	// 		'stars': 585,
+	// 		'description': 'Simple and intuitive iOS chart library. Contribution graph, clock chart, and baralweriujncafwetijnf',
+	// 		'tags': ['Chart', 'iOS'],
+	// 		'readme': "# TEAChart \r\n TEAChart is a chart."
+	// 	},
+	// 	{
+	// 		'title': 'Stargazer',
+	// 		'stars': 1024,
+	// 		'description': 'GitHub star management, on web.',
+	// 		'tags': ['GitHub', 'Web'],
+	// 		'readme': "# Stargazer \r\n GitHub star management, on web."
+	// 	}
+	// ];
+	var repos = [];
 
-	importFromPouchDB();
-	function importFromPouchDB () {
+	marked.setOptions({
+	  renderer: new marked.Renderer(),
+	  gfm: true,
+	  tables: true,
+	  breaks: false,
+	  pedantic: false,
+	  sanitize: true,
+	  smartLists: true,
+	  smartypants: false
+	});
+
+	factory.importFromPouchDB = function (callback) {
 		var db = new PouchDB('http://starwarden:password@localhost:5984/yzheng624');
 		functionOutOfLoop = function (err, doc) {
 			repo = {
@@ -45,16 +56,17 @@ stargazerApp.factory('stargazerFactory', function () {
 				'stars': doc.stargazers_count,
 				'description': doc.description,
 				'tags': ['Chart', 'iOS'],
-				'readme': "# TEAChart \r\n TEAChart is a chart."
+				'readme': doc.description
 			};
 			repos.push(repo);
+			callback();
 		};
 		db.allDocs(function(err, doc) {
 			for (i = 0; i < doc.rows.length; i++) {
 				db.get(doc.rows[i].id, functionOutOfLoop);
 			}
 		});
-	}
+	};
 
 	factory.getTags = function () {
 		return tags;

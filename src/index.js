@@ -5,7 +5,7 @@ $(function() {
     function sync() {
         // syncDom.setAttribute('data-sync-state', 'syncing');
         var opts = {live: true};
-        // db.replicate.to(remoteCouch, opts);
+        db.replicate.to(remoteCouch, opts);
         db.replicate.from(remoteCouch, opts);
     }
 
