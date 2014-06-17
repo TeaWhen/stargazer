@@ -42,6 +42,7 @@ end
 configure do
   set :client_id, ENV["STARGAZER_CLIENT_ID"]
   set :client_secret, ENV["STARGAZER_CLIENT_SECRET"]
+  set :cookie_options, {httponly: false}
 
   use Rack::Session::Cookie, :secret => ENV["STARGAZER_COOKIE_SECRET"]
 end
@@ -54,9 +55,9 @@ helpers do
     client = Octokit::Client.new(access_token: cookies[:atk])
     begin
       user = client.user
+      cookies[:atk] = cookies[:atk] #override for httponly
       cookies[:username] = user.login
       cookies[:dbname] = user.login.downcase
-      cookies[:httponly] = false
     rescue
       user = nil
     end
