@@ -56,6 +56,7 @@ helpers do
       user = client.user
       cookies[:username] = user.login
       cookies[:dbname] = user.login.downcase
+      cookies[:httponly] = false
     rescue
       user = nil
     end
@@ -97,7 +98,7 @@ end
 
 get '/u/?' do
   client = check_login
-  user = client
+  user = client.user
   resp = Unirest.get "http://127.0.0.1:5984/stargazer_meta/#{user.login}",
     auth: { user: "starwarden", password: ENV["COUCHDB_ADMIN_PASSWORD"]}
   if resp.body["downloaded"]
