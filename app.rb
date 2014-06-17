@@ -54,6 +54,8 @@ helpers do
     client = Octokit::Client.new(access_token: cookies[:atk])
     begin
       user = client.user
+      cookies[:username] = user.login
+      cookies[:dbname] = user.login.downcase
     rescue
       user = nil
     end
