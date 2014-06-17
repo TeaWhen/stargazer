@@ -49,7 +49,7 @@ stargazerApp.factory('stargazerFactory', function () {
 	});
 
 	factory.importFromPouchDB = function (callback) {
-		var db = new PouchDB('http://starwarden:password@localhost:5984/yzheng624');
+		var db = new PouchDB('http://' + $.cookie('username') + ':' + $.cookie('atk') + '@localhost:5984/' + $.cookie('dbname'));
 		functionOutOfLoop = function (err, doc) {
 			repo = {
 				'title': doc.name,
