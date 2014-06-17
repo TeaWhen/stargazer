@@ -19,7 +19,7 @@ export STARGAZER_COOKIE_SECRET={cookie_salt}
 export COUCHDB_ADMIN_PASSWORD={couchdb_admin_password}
 ```
 
-1. Install CouchDB, and setup an admin with name 'starwarden', use the password in env vars.
+1. Install and startup CouchDB, and setup an admin with name 'starwarden', use the password in env vars.
 2. Install redis.
 3. `bundle`
 4. Setup meta db with `ruby bootstrap.rb`
@@ -27,7 +27,6 @@ export COUCHDB_ADMIN_PASSWORD={couchdb_admin_password}
 6. Fire up sidekiq with `sidekiq -r ./app.rb`
 7. Fire up server with `shotgun`
 8. http://127.0.0.1:9393/login and wait
-9. `couchdb`
 
 ## Enabling CORS
 
