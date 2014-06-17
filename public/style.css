@@ -113,11 +113,17 @@ h2 {
 	padding-left: 56px;
 }
 
+#repolist .caret {
+	margin-left: 4px;
+	margin-top: -2px;
+}
+
 #sort-select {
 	width: 100%;
 	line-height: 25px;
 	border: 0;
 	border-bottom: 1px solid #DDD;
+	text-transform: capitalize;
 }
 
 #sort {
