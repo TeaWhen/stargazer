@@ -92,10 +92,10 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 		}
 	};
 
-	$(document).ready(function () {
-		console.log($(".description"));
-		$(".description").ellipsis({
-			row: 2
-		});
-	});
+	// $(document).ready(function () {
+	// 	console.log($(".description"));
+	// 	$(".description").ellipsis({
+	// 		row: 2
+	// 	});
+	// });
 });

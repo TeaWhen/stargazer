@@ -55,7 +55,7 @@ h1 {
 	margin: 20px auto;
 	height: 37px;
 	border: 0;
-	padding: 2px 45px;
+	padding: 2px 32px 2px 45px;
 	background-color: #4C4C4C;
 	color: #A6A6A6;
 	outline: none;
@@ -134,14 +134,15 @@ h2 {
 #repolist .repo {
 	padding: 10px 20px 15px 20px;
 	border-bottom: 1px solid #DDD;
+	cursor: pointer;
 }
 
-#repolist .repo:hover {
-	background-color: rgb(210, 210, 210);
+#repolist .repo:not(.active):hover {
+	background-color: #FBFBFB;
 }
 
 #repolist .active {
-	background-color: rgb(170, 170, 170);
+	background-color: #F8F8F8;
 }
 
 #repolist .hidden {
