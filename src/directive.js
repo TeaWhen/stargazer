@@ -50,20 +50,22 @@ stargazerApp.factory('stargazerFactory', function () {
 
 	factory.importFromPouchDB = function (callback) {
 		var db = new PouchDB('http://' + $.cookie('username') + ':' + $.cookie('atk') + '@localhost:5984/' + $.cookie('dbname'));
-		functionOutOfLoop = function (err, doc) {
+		docCallback = function (err, doc) {
 			repo = {
 				'title': doc.name,
 				'stars': doc.stargazers_count,
 				'description': doc.description,
 				'tags': ['Chart', 'iOS'],
-				'readme': doc.description
+				'readme': doc.description,
+				'language': doc.language,
+				'forks_count': doc.forks_count,
 			};
 			repos.push(repo);
 			callback();
 		};
 		db.allDocs(function(err, doc) {
 			for (i = 0; i < doc.rows.length; i++) {
-				db.get(doc.rows[i].id, functionOutOfLoop);
+				db.get(doc.rows[i].id, docCallback);
 			}
 		});
 	};

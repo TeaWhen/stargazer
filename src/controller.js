@@ -68,6 +68,13 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 					}
 				}
 			}
+		} else if (filter == 'language') {
+			for (i = 0; i < $scope.repos.length; ++i) {
+				$scope.repos[i].visible = true;
+				if ($scope.selected[filter].length > 0 && $scope.selected[filter].indexOf($scope.repos[i].language) <= -1) {
+					$scope.repos[i].visible = false;
+				}
+			}
 		}
 	};
 
