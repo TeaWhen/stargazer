@@ -37,7 +37,6 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 				$scope.repos = stargazerFactory.getRepos();
 				for (i = 0; i < $scope.repos.length; ++i) {
 					$scope.repos[i].visible = true;
-					// $scope.repos[i].readme = getReadme(i, $scope.repos[i].readme);
 				}
 			});
 		});
@@ -68,7 +67,6 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 			$scope.selected[filter] = [item];
 			for (i = 0; i < $scope.repos.length; ++i) {
 				if ($scope.repos[i].title == item) {
-					// $scope.curRepo = $scope.repos[i];
 					setReadme(i);
 					break;
 				}
