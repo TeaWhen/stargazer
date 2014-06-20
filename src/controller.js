@@ -31,7 +31,7 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 		stargazerFactory.importFromPouchDB(function () {
 			$scope.$apply(function () {
 				$scope.tags = stargazerFactory.getTags();
-				$scope.languages = stargazerFactory.getLanguages();
+				$scope.languages = stargazerFactory.getLanguages().sort();
 				$scope.sorts = stargazerFactory.getSorts();
 				$scope.untagged = stargazerFactory.getUntagged();
 				$scope.repos = stargazerFactory.getRepos();

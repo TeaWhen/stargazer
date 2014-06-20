@@ -61,6 +61,11 @@ stargazerApp.factory('stargazerFactory', function () {
 				'forks_count': doc.forks_count,
 			};
 			repos.push(repo);
+
+			if (languages.indexOf(doc.language) <= -1) {
+				languages.push(doc.language);
+			}
+
 			callback();
 		};
 		db.allDocs(function(err, doc) {
