@@ -26,7 +26,7 @@ html, body {
 	float: left;
 }
 
-h1 {
+#sidebar h1 {
 	text-align: center;
 	font-size: 36px;
 }
@@ -39,7 +39,7 @@ h1 {
 }
 
 #main {
-	width: 50%;
+	width: 55%;
 	float: left;
 }
 
@@ -62,7 +62,7 @@ h1 {
 	font-size: 20px;
 }
 
-h2 {
+#sidebar h2 {
 	padding: 2px 45px;
 	font-family: SourceSansPro-Semibold;
 	font-size: 20px;

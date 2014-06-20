@@ -56,10 +56,11 @@ stargazerApp.factory('stargazerFactory', function () {
 				'stars': doc.stargazers_count,
 				'description': doc.description,
 				'tags': ['Chart', 'iOS'],
-				'readme': doc.description,
+				'readme': 'https://api.github.com/repos/' + doc.full_name + '/readme',
 				'language': doc.language,
-				'forks_count': doc.forks_count,
+				'forks_count': doc.forks_count
 			};
+			console.log(doc);
 			repos.push(repo);
 
 			if (languages.indexOf(doc.language) <= -1) {
