@@ -111,6 +111,52 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 		}
 	};
 
+	curTitle = null;
+
+	$scope.tokenfieldClicked = function (title) {
+		if (title === curTitle) {
+			return;
+		}
+		curTitle = title;
+
+		console.log(title);
+		$('#' + title + ' .tag').hide();
+
+		local = [];
+		for (i = 0; i < $scope.tags.length; i++) {
+			local.push({value: $scope.tags[i]});
+		}
+		console.log(local);
+
+		var engine = new Bloodhound({
+			local: local,
+			datumTokenizer: function(d) {
+				return Bloodhound.tokenizers.whitespace(d.value); 
+			},
+			queryTokenizer: Bloodhound.tokenizers.whitespace    
+		});
+
+		engine.initialize();
+
+		$('#' + title + ' #tokenfield').tokenfield({
+			typeahead: [null, { source: engine.ttAdapter() }]
+		});
+
+
+		for (i = 0; i < $scope.repos.length; i++) {
+			repo = $scope.repos[i];
+			if (repo.title === title) {
+				break;
+			}
+		}
+
+		for (i = 0; i < repo.tags.length; i++) {
+			$('#' + title + ' #tokenfield').tokenfield('createToken', repo.tags[i]);
+		}
+
+		$('#' + title + ' #tokenfield').show();
+	};
+
 	// $(document).ready(function () {
 	// 	console.log($(".description"));
 	// 	$(".description").ellipsis({
