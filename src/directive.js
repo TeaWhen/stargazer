@@ -4,14 +4,14 @@ stargazerApp.factory('stargazerFactory', function () {
 		'Chart',
 		'iOS',
 		'GitHub',
-		'Web'
+		'Web',
+		'Bootstrap'
 	];
 	var languages = [
 		'Objective-C',
 		'Python',
 		'Ruby',
-		'JavaScript',
-		'Bootstrap'
+		'JavaScript'
 	];
 	var sorts = [
 		'Stars',
