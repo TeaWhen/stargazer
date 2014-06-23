@@ -160,6 +160,19 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 			$('#' + title + ' #tokenfield').tokenfield('destroy');
 			$('#' + title + ' #tokenfield').hide();
 		});
+		$('#' + title + ' #tokenfield').on('tokenfield:removedtoken', function (event) {
+			var existingTokens = $(this).tokenfield('getTokens');
+			$scope.$apply(function () {
+				tags = [];
+				$.each(existingTokens, function(index, token) {
+					tags.push(token.label);
+			    });
+				repo.tags = tags;
+			});
+			$('#' + title + ' .tag').show();
+			$('#' + title + ' #tokenfield').tokenfield('destroy');
+			$('#' + title + ' #tokenfield').hide();
+		});
 	};
 
 	// $(document).ready(function () {
