@@ -10,7 +10,8 @@ stargazerApp.factory('stargazerFactory', function () {
 		'Objective-C',
 		'Python',
 		'Ruby',
-		'JavaScript'
+		'JavaScript',
+		'Bootstrap'
 	];
 	var sorts = [
 		'Stars',
@@ -55,12 +56,11 @@ stargazerApp.factory('stargazerFactory', function () {
 				'title': doc.name,
 				'stars': doc.stargazers_count,
 				'description': doc.description,
-				'tags': ['Chart', 'iOS'],
+				'tags': [doc.language],
 				'readme': 'https://api.github.com/repos/' + doc.full_name + '/readme',
 				'language': doc.language,
 				'forks_count': doc.forks_count
 			};
-			console.log(doc);
 			repos.push(repo);
 
 			if (languages.indexOf(doc.language) <= -1) {

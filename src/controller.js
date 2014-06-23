@@ -126,7 +126,6 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 		for (i = 0; i < $scope.tags.length; i++) {
 			local.push({value: $scope.tags[i]});
 		}
-		console.log(local);
 
 		var engine = new Bloodhound({
 			local: local,
@@ -135,13 +134,10 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 			},
 			queryTokenizer: Bloodhound.tokenizers.whitespace    
 		});
-
 		engine.initialize();
-
 		$('#' + title + ' #tokenfield').tokenfield({
 			typeahead: [null, { source: engine.ttAdapter() }]
 		});
-
 
 		for (i = 0; i < $scope.repos.length; i++) {
 			repo = $scope.repos[i];
@@ -155,6 +151,15 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 		}
 
 		$('#' + title + ' #tokenfield').show();
+		$('#' + title + ' #tokenfield').on('tokenfield:createdtoken', function (event) {
+			var existingTokens = $(this).tokenfield('getTokens');
+			$scope.$apply(function () {
+				repo.tags.push(existingTokens[existingTokens.length - 1].label);
+			});
+			$('#' + title + ' .tag').show();
+			$('#' + title + ' #tokenfield').tokenfield('destroy');
+			$('#' + title + ' #tokenfield').hide();
+		});
 	};
 
 	// $(document).ready(function () {
