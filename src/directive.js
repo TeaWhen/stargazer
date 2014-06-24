@@ -46,8 +46,6 @@ stargazerApp.factory('stargazerFactory', function () {
 				if (languages.indexOf(doc.language) <= -1) {
 					languages.push(doc.language);
 				}
-				console.log(doc);
-				db.put(doc);
 				callback();
 			};
 			db.allDocs(function(err, doc) {

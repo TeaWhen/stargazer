@@ -174,8 +174,9 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 			var existingTokens = $(this).tokenfield('getTokens');
 			$scope.$apply(function () {
 				repo.tags.push(existingTokens[existingTokens.length - 1].label);
+				db.put(repo);
+				sync();
 			});
-			db.put(repo);
 			$(tagSelector).show();
 			$(tokenfieldSelector).tokenfield('destroy');
 			$(tokenfieldSelector).hide();
@@ -189,8 +190,9 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 					tags.push(token.label);
 			    });
 			    repo.tags = tags;
+			    db.put(repo);
+			    sync();
 			});
-			db.put(repo);
 			$(tagSelector).show();
 			$(tokenfieldSelector).tokenfield('destroy');
 			$(tokenfieldSelector).hide();
