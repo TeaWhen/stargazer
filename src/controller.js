@@ -18,9 +18,10 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 	$scope.untagged = 0;
 	$scope.selected = {};
 	$scope.searchText = '';
-	$scope.sortSelected = 'title';
+	$scope.sortSelected = 'name';
 	$scope.repos = [];
 	$scope.curRepo = {'readme': marked("# Welcome. \r\n Let's show you how to use stargazer.")};
+	visible = {};
 	filters = ['general', 'repo', 'tag', 'language'];
 
 	init();
@@ -36,7 +37,7 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 				$scope.untagged = stargazerFactory.getUntagged();
 				$scope.repos = stargazerFactory.getRepos();
 				for (i = 0; i < $scope.repos.length; ++i) {
-					$scope.repos[i].visible = true;
+					visible[$scope.repos[i].name] = true;
 				}
 			});
 		});
@@ -66,25 +67,25 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 		if (filter == 'repo') {
 			$scope.selected[filter] = [item];
 			for (i = 0; i < $scope.repos.length; ++i) {
-				if ($scope.repos[i].title == item) {
+				if ($scope.repos[i].name == item) {
 					setReadme(i);
 					break;
 				}
 			}
 		} else if (filter == 'tag') {
 			for (i = 0; i < $scope.repos.length; ++i) {
-				$scope.repos[i].visible = true;
+				visible[$scope.repos[i].name] = true;
 				for (j = 0; j < $scope.selected[filter].length; ++j) {
 					if ($scope.repos[i].tags.indexOf($scope.selected.tag[j]) <= -1) {
-						$scope.repos[i].visible = false;
+						visible[$scope.repos[i].name] = false;
 					}
 				}
 			}
 		} else if (filter == 'language') {
 			for (i = 0; i < $scope.repos.length; ++i) {
-				$scope.repos[i].visible = true;
+				visible[$scope.repos[i].name] = true;
 				if ($scope.selected[filter].length > 0 && $scope.selected[filter].indexOf($scope.repos[i].language) <= -1) {
-					$scope.repos[i].visible = false;
+					visible[$scope.repos[i].name] = false;
 				}
 			}
 		}
@@ -94,10 +95,10 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 		return $scope.selected[filter].indexOf(item) > -1;
 	};
 
-	$scope.isHidden = function (title) {
+	$scope.isHidden = function (name) {
 		for (i = 0; i < $scope.repos.length; ++i) {
-			if ($scope.repos[i].title === title) {
-				return !$scope.repos[i].visible;
+			if ($scope.repos[i].name === name) {
+				return !visible[$scope.repos[i].name];
 			}
 		}
 	};
@@ -113,14 +114,17 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 
 	curTitle = null;
 
-	$scope.tokenfieldClicked = function (title) {
-		if (title === curTitle) {
+	$scope.tokenfieldClicked = function (name) {
+		if (name === curTitle) {
 			return;
 		}
-		curTitle = title;
+		curTitle = name;
 
-		console.log(title);
-		$('#' + title + ' .tag').hide();
+		tagSelector = '#' + name + ' .tag';
+		tokenfieldSelector = '#' + name + ' #tokenfield';
+
+		console.log(name);
+		$(tagSelector).hide();
 
 		local = [];
 		for (i = 0; i < $scope.tags.length; i++) {
@@ -135,43 +139,46 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 			queryTokenizer: Bloodhound.tokenizers.whitespace    
 		});
 		engine.initialize();
-		$('#' + title + ' #tokenfield').tokenfield({
+		$(tokenfieldSelector).tokenfield({
 			typeahead: [null, { source: engine.ttAdapter() }]
 		});
 
 		for (i = 0; i < $scope.repos.length; i++) {
 			repo = $scope.repos[i];
-			if (repo.title === title) {
+			if (repo.name === name) {
 				break;
 			}
 		}
 
 		for (i = 0; i < repo.tags.length; i++) {
-			$('#' + title + ' #tokenfield').tokenfield('createToken', repo.tags[i]);
+			$(tokenfieldSelector).tokenfield('createToken', repo.tags[i]);
 		}
 
-		$('#' + title + ' #tokenfield').show();
-		$('#' + title + ' #tokenfield').on('tokenfield:createdtoken', function (event) {
+		$(tokenfieldSelector).show();
+		$(tokenfieldSelector).on('tokenfield:createdtoken', function (event) {
 			var existingTokens = $(this).tokenfield('getTokens');
 			$scope.$apply(function () {
 				repo.tags.push(existingTokens[existingTokens.length - 1].label);
 			});
-			$('#' + title + ' .tag').show();
-			$('#' + title + ' #tokenfield').tokenfield('destroy');
-			$('#' + title + ' #tokenfield').hide();
+			db.put(repo);
+			$(tagSelector).show();
+			$(tokenfieldSelector).tokenfield('destroy');
+			$(tokenfieldSelector).hide();
 		});
-		$('#' + title + ' #tokenfield').on('tokenfield:removedtoken', function (event) {
+
+		$(tokenfieldSelector).on('tokenfield:removedtoken', function (event) {
 			var existingTokens = $(this).tokenfield('getTokens');
 			$scope.$apply(function () {
 				tags = [];
 				$.each(existingTokens, function(index, token) {
 					tags.push(token.label);
 			    });
-				repo.tags = tags;
+			    repo.tags = tags;
 			});
-			$('#' + title + ' .tag').show();
-			$('#' + title + ' #tokenfield').tokenfield('destroy');
-			$('#' + title + ' #tokenfield').hide();
+			db.put(repo);
+			$(tagSelector).show();
+			$(tokenfieldSelector).tokenfield('destroy');
+			$(tokenfieldSelector).hide();
 		});
 	};
 

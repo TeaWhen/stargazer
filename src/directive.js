@@ -16,26 +16,10 @@ stargazerApp.factory('stargazerFactory', function () {
 	var sorts = [
 		'Stars',
 		'Date',
-		'Title'
+		'Name'
 	];
 	var untagged = 33;
 
-	// var repos = [
-	// 	{
-	// 		'title': 'TEAChart',
-	// 		'stars': 585,
-	// 		'description': 'Simple and intuitive iOS chart library. Contribution graph, clock chart, and baralweriujncafwetijnf',
-	// 		'tags': ['Chart', 'iOS'],
-	// 		'readme': "# TEAChart \r\n TEAChart is a chart."
-	// 	},
-	// 	{
-	// 		'title': 'Stargazer',
-	// 		'stars': 1024,
-	// 		'description': 'GitHub star management, on web.',
-	// 		'tags': ['GitHub', 'Web'],
-	// 		'readme': "# Stargazer \r\n GitHub star management, on web."
-	// 	}
-	// ];
 	var repos = [];
 
 	marked.setOptions({
@@ -50,29 +34,27 @@ stargazerApp.factory('stargazerFactory', function () {
 	});
 
 	factory.importFromPouchDB = function (callback) {
-		var db = new PouchDB('http://' + $.cookie('username') + ':' + $.cookie('atk') + '@localhost:5984/' + $.cookie('dbname'));
-		docCallback = function (err, doc) {
-			repo = {
-				'title': doc.name,
-				'stars': doc.stargazers_count,
-				'description': doc.description,
-				'tags': [doc.language],
-				'readme': 'https://api.github.com/repos/' + doc.full_name + '/readme',
-				'language': doc.language,
-				'forks_count': doc.forks_count
+		connectPouchDB(function () {
+			docCallback = function (err, doc) {
+				doc.readme = 'https://api.github.com/repos/' + doc.full_name + '/readme';
+				if (doc.tags === null && doc.language !== null) {
+					doc.tags = [doc.language];
+				} else if (doc.tags === null) {
+					doc.tags = [];
+				}
+				repos.push(doc);
+				if (languages.indexOf(doc.language) <= -1) {
+					languages.push(doc.language);
+				}
+				console.log(doc);
+				db.put(doc);
+				callback();
 			};
-			repos.push(repo);
-
-			if (languages.indexOf(doc.language) <= -1) {
-				languages.push(doc.language);
-			}
-
-			callback();
-		};
-		db.allDocs(function(err, doc) {
-			for (i = 0; i < doc.rows.length; i++) {
-				db.get(doc.rows[i].id, docCallback);
-			}
+			db.allDocs(function(err, doc) {
+				for (i = 0; i < doc.rows.length; i++) {
+					db.get(doc.rows[i].id, docCallback);
+				}
+			});
 		});
 	};
 

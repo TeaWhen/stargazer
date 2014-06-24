@@ -7,7 +7,7 @@
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.8/angular-sanitize.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="js/vendor.js"></script>
-	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<script src="http://cdn.jsdelivr.net/pouchdb/2.2.3/pouchdb.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/pagedown/1.0/Markdown.Converter.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
@@ -52,16 +52,16 @@
 						<li data-ng-repeat="sort in sorts" data-ng-click="selectSort(sort)"><a href>{{ sort }}</a></li>
 					</ul>
 				</div>
-				<div class="repo" data-ng-repeat="repo in repos | orderBy:sortSelected | filter:searchText" data-ng-click="select('repo', repo.title)" data-ng-class="{active: isActive('repo', repo.title), hidden: isHidden(repo.title)}" data-ng-attr-id="{{ repo.title }}">
+				<div class="repo" data-ng-repeat="repo in repos | orderBy:sortSelected | filter:searchText" data-ng-click="select('repo', repo.name)" data-ng-class="{active: isActive('repo', repo.name), hidden: isHidden(repo.name)}" data-ng-attr-id="{{ repo.name }}">
 					<div class="title-line">
-						<p class="title">{{ repo.title }}</p>
+						<p class="title">{{ repo.name }}</p>
 						<p class="stars">
-							<span class="star-number">{{ repo.stars }}</span>
+							<span class="star-number">{{ repo.stargazers_count }}</span>
 							<span class="glyphicon glyphicon-star star-icon"></span>
 						</p>
 					</div>
 					<div class="description">{{ repo.description }}</div>
-					<div data-ng-click="tokenfieldClicked(repo.title)">
+					<div data-ng-click="tokenfieldClicked(repo.name)">
 						<input type="text" class="form-control" id="tokenfield" style="display: none" />
 						<span class="tag" data-ng-repeat="tag in repo.tags">{{ tag }}</span>
 					</div>
