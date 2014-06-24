@@ -27,8 +27,8 @@
 	<div class="container-fluid" id="container">
 		<div class="row" id="row">
 			<div id="sidebar">
-				<h1>Stargazer</h1>
-				<img id="avatar" src="66.png" class="img-thumbnail" align="middle">
+				<h1>Stargazer {{ username }}</h1>
+				<img id="avatar" src="{{ avatar }}" class="img-thumbnail" align="middle">
 				<input id="search" data-ng-model="searchText" type="text" placeholder="Search...">
 				<ul id="general">
 					<li id="all" data-ng-click="select('general', 'all')" data-ng-class="{active: isActive('general', 'all')}">All</li>

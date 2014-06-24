@@ -21,6 +21,8 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 	$scope.sortSelected = 'name';
 	$scope.repos = [];
 	$scope.curRepo = {'readme': marked("# Welcome. \r\n Let's show you how to use stargazer.")};
+	$scope.username = $.cookie('username');
+	$scope.avatar = "/66.png";
 	visible = {};
 	filters = ['general', 'repo', 'tag', 'language'];
 
@@ -40,6 +42,19 @@ stargazerApp.controller('stargazerController', function ($scope, $sce, stargazer
 					visible[$scope.repos[i].name] = true;
 				}
 			});
+		});
+		setAvatar();
+	}
+
+	function setAvatar() {
+		$.ajax({
+			url: 'https://api.github.com/users/' + $scope.username,
+			dataType: "json",
+			success: function (data) {
+				$scope.$apply(function () {
+					$scope.avatar = data.avatar_url;
+				});
+			}
 		});
 	}
 
