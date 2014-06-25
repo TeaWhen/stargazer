@@ -30,7 +30,7 @@ export COUCHDB_ADMIN_PASSWORD={couchdb_admin_password}
 
 ## Enabling CORS
 
-To replicate directly with CouchDB, you need to make sure CORS is enabled. Only set the username and password if you have set them previously. By default, CouchDB will be installed in "Admin Party," where username and password are not needed. You will need to replace myname.iriscouch.com with your own host (127.0.0.1:5984 if installed locally):
+To replicate directly with CouchDB, you need to make sure CORS is enabled.
 
 ```bash
 export HOST=http://starwarden:password@127.0.0.1:5984
