@@ -21,6 +21,8 @@
         margin-top: 30px;
     }
     #title {
+        opacity: 0;
+
         float: left;
     }
     #title h1 {
@@ -33,6 +35,8 @@
         font-size: 22px;
     }
     #login {
+        opacity: 0;
+
         float: right;
         width: 170px;
         margin-top: 58px;
@@ -56,10 +60,23 @@
         top: 1px;
     }
     #screenshot {
-        display: block;
+        opacity: 0;
         margin: auto;
+        margin-top: 5px;
     }
 </style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    $(function() {
+        $("#title, #login").animate({
+            "opacity": 1
+        }, "slow");
+        $("#screenshot").animate({
+            "opacity": 1,
+            "margin-top": 0
+        }, "slow");
+    })
+</script>
 <body>
     <div id="header">
         <div id="title">
