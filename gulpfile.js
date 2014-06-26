@@ -29,11 +29,15 @@ gulp.task('minify', function(){
 
 gulp.task('watch', function() {
   gulp.watch('src/*.js', ['lint', 'minify']);
+  gulp.watch('src/*.html', ['erbify']);
 });
 
 gulp.task('erbify', function() {
-  return gulp.src('src/user.html')
+  gulp.src('src/user.html')
     .pipe(rename('user.erb'))
+    .pipe(gulp.dest('views'));
+  gulp.src('src/index.html')
+    .pipe(rename('index.erb'))
     .pipe(gulp.dest('views'));
 });
 

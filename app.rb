@@ -68,6 +68,10 @@ helpers do
   end
 end
 
+get '/' do
+  erb :index
+end
+
 get '/login/?' do
   unless cookies[:atk]
     redirect "https://github.com/login/oauth/authorize?client_id=#{settings.client_id}&redirect_uri=http://127.0.0.1:9393/auth_github/&scope=user:follow"
